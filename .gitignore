@@ -6,3 +6,6 @@ pom.xml
 /bin/
 .lein-deps-sum
 .cake
+/.settings/
+.project
+.classpath
