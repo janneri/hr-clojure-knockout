@@ -31,7 +31,7 @@
 
 (defn list-emps [] @employees)
 
-(defn emps-of-dept [dept-id] (filter #(= dept-id (% :department)) (vals (list-emps))))
+(defn emps-of-dept [dept-id] (filter #(= dept-id (:department %)) (vals (list-emps))))
 
 (defn add-entity-with-id [target-atom entity]
   (let [id (next-id)]

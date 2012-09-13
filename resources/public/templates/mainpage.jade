@@ -1,0 +1,19 @@
+!!! 5
+html
+  head
+    title=hr
+    link(rel='stylesheet', href='/css/reset.css')
+    link(rel='stylesheet', href='/css/hr.css')
+    script(src='/js/jquery-1.8.1.min.js')
+    script(src='/js/knockout-2.1.0.debug.js')
+    script(src='/js/mainpage.js')
+  body
+    form.adddepartment(data-bind="submit: addDepartment")
+      p Add department: 
+      input(data-bind="value: newDepartmentText", placeholder="department name")
+      button(type="submit") Save
+    ul.departments(data-bind="foreach: departments, visible: departments().length > 0")
+      li
+        p(data-bind="text: name")
+        p(data-bind="text: empcount")
+        a(data-bind="click: $parent.removeDepartment", href="#") Delete
