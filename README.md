@@ -2,6 +2,8 @@
 
 The HR (employees, departments) web-application written in clojure-back and knockout-front. 
 
+![preview](http://github.com/janneri/hr-clojure-knockout/raw/master/hr-clojure.png)
+
 ## Usage
 
 ```bash
