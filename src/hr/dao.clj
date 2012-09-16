@@ -5,7 +5,7 @@
 
 (def departments (atom {}))
 
-(defn list-departments [] @departments)
+(defn list-departments [] (sort-by :id @departments))
 
 (defn get-department [id] (@departments id))
 
@@ -16,6 +16,9 @@
 
 (defn delete-department [id]
     (swap! departments dissoc id))
+
+(defn delete-employee [id]
+    (swap! employees dissoc id))
 
 (declare emps-of-dept)
 
@@ -31,7 +34,12 @@
 
 (defn list-emps [] @employees)
 
-(defn emps-of-dept [dept-id] (filter #(= dept-id (:department %)) (vals (list-emps))))
+(defn list-emps-with-id []
+  (for [[emp-id emp-details] (list-emps)] 
+    (assoc emp-details :id emp-id)))
+
+
+(defn emps-of-dept [dept-id] (filter #(= dept-id (:department %)) (list-emps-with-id)))
 
 (defn add-entity-with-id [target-atom entity]
   (let [id (next-id)]

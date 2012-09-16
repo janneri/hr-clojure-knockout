@@ -1,12 +1,11 @@
-ul {
-    list-style-type: none;
-}
-
-ul.departments p {
-    float: left;
-    width: 150px;
-}
-
 form.adddepartment p {
 	display: inline;
+}
+
+td, th {
+	padding: 0 12px 0 12px;
+}
+
+.selected td {
+	font-weight: bold;
 }

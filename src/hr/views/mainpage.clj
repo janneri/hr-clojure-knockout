@@ -24,10 +24,11 @@
            ]
          ))
 
-(defpage "/" [] (read-template "mainpage"))
-
 (defn read-template [name]
   (let [url (java.net.URL. (str "http://localhost:8080/templates/" name ".jade"))]
-      (Jade4J/render url (java.util.HashMap.))))
+      (Jade4J/render url {})))
+
+(defpage "/" [] (read-template "mainpage"))
+
   
   

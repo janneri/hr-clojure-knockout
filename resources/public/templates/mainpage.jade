@@ -1,4 +1,4 @@
-!!! 5
+doctype 5
 html
   head
     title=hr
@@ -6,14 +6,43 @@ html
     link(rel='stylesheet', href='/css/hr.css')
     script(src='/js/jquery-1.8.1.min.js')
     script(src='/js/knockout-2.1.0.debug.js')
+    script(src='/js/sammy-0.7.1.js')
     script(src='/js/mainpage.js')
   body
     form.adddepartment(data-bind="submit: addDepartment")
       p Add department: 
       input(data-bind="value: newDepartmentText", placeholder="department name")
       button(type="submit") Save
-    ul.departments(data-bind="foreach: departments, visible: departments().length > 0")
-      li
-        p(data-bind="text: name")
-        p(data-bind="text: empcount")
-        a(data-bind="click: $parent.removeDepartment", href="#") Delete
+    table.departments(data-bind="foreach: departments, visible: departments().length > 0")
+      tr(data-bind="css: { selected: id() == $root.chosenDepartmentId() }") 
+        td(data-bind="text: name, click: $root.clickDepartment")
+        td(data-bind="text: empcount")
+        td
+          a(data-bind="click: $parent.removeDepartment, visible: empcount() == 0", href="#") Delete
+    
+    hr
+    
+    div(data-bind="visible: showEmployees()") Employees of  
+      em(data-bind="text: chosenDepartmentName")
+    table.employees(data-bind="visible: showEmployees()")
+      thead
+        tr
+          th Firstname
+          th Lastname
+      tbody(data-bind="foreach: employees")
+        tr
+          td(data-bind="text: firstname")
+          td(data-bind="text: lastname")
+          td
+            a(data-bind="click: $parent.removeEmployee", href="#") Delete
+    a(data-bind="click: $root.clickAddEmployee, visible: $root.getSelectedDepartmentView() == 'list'", href="#")
+      span Add employee to 
+      span(data-bind="text: chosenDepartmentName")
+      
+    form.addemployee(data-bind="submit: addEmployee, visible: $root.getSelectedDepartmentView() == 'addemployee'")
+      p Add employee: 
+      input(data-bind="value: firstname", placeholder="firstname")
+      input(data-bind="value: lastname", placeholder="lastname")
+      button(type="submit") Save
+    
+    
